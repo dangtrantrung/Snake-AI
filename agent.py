@@ -14,8 +14,8 @@ class Agent:
         self.n_games=0
         self.epsilon=0 # randomness
         self.gamma=0  # discount rate
-        self.memory=deque(maxlen=MAX_MEMORY)  #popleft remove element form left memory
-        # model, trainer
+        self.memory=deque(maxlen=MAX_MEMORY)  #popleft remove elements from left memory
+        # TODO: model, trainer
 
 
     def get_state(self,game):
@@ -30,7 +30,23 @@ class Agent:
         pass
 
 def train():
-    pass
+    # pass
+    plot_scores=[]
+    plot_mean_score=[]
+    total_score=0
+    record=0
+    agent=Agent()
+    game=SnakeGameAI()
+    while True:
+        # get old state
+        state_old=agent.get_state(game)
+        # get_move
+        final_move=agent.get_action(state_old)
+        # perform move and get new state
+        reward,done,score=game.play_step(final_move)
+        state_new=agent.get_state(game)
+
+        # train short memory
 
 if __name__=='__main__':
     train()
