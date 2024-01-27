@@ -4,6 +4,7 @@ import numpy as np
 from collections import deque
 from game import SnakeGameAI,Point,Direction
 from model import Linear_QNet,QTrainer
+from helper import plot
 
 MAX_MEMORY=100000
 BATCH_SIZE=1000
@@ -82,7 +83,7 @@ class Agent:
         states,actions,rewards,next_states,dones=zip(*mini_sample)
         self.trainer.train_step(states,actions,rewards,next_states,dones)
 
-    def train_short_memory(self):
+    def train_short_memory(self, state, action, reward, next_state, done):
         #pass
         self.trainer.train_step(state,action,reward,next_state,done)
 
@@ -132,6 +133,11 @@ def train():
                 agent.model.save()
             print('Game', agent.n_games,'Score',score,'Record',record)
             # TODO : plot result
+            plot_scores.append(score)
+            total_score+=score
+            mean_score=total_score/agent.n_games
+            plot_mean_score.append(mean_score)
+            plot(plot_scores,plot_mean_score)
 
 
 
