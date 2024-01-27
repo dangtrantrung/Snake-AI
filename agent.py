@@ -10,7 +10,14 @@ LR=0.001
 
 class Agent:
     def __init__(self):
-        pass
+        # pass
+        self.n_games=0
+        self.epsilon=0 # randomness
+        self.gamma=0  # discount rate
+        self.memory=deque(maxlen=MAX_MEMORY)  #popleft remove element form left memory
+        # model, trainer
+
+
     def get_state(self,game):
         pass
     def remember(self,state,action,reward,next_state,done):
@@ -25,5 +32,5 @@ class Agent:
 def train():
     pass
 
-if__name__=='__main__':
+if __name__=='__main__':
     train()
