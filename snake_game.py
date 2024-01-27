@@ -7,6 +7,13 @@ pygame.init()
 font = pygame.font.Font('arial.ttf', 25)
 #font = pygame.font.SysFont('arial', 25)
 
+# reset
+# reward
+# play(action)->direction
+# game loop - game iteration
+# is_collision
+
+
 class Direction(Enum):
     RIGHT = 1
     LEFT = 2
@@ -25,7 +32,7 @@ BLACK = (0,0,0)
 BLOCK_SIZE = 20
 SPEED = 20
 
-class SnakeGame:
+class SnakeGameAI:
 
     def __init__(self, w=640, h=480):
         self.w = w
@@ -35,6 +42,10 @@ class SnakeGame:
         pygame.display.set_caption('Snake')
         self.clock = pygame.time.Clock()
 
+
+
+    # reset func
+    def reset(self):
         # init game state
         self.direction = Direction.RIGHT
 
@@ -46,6 +57,8 @@ class SnakeGame:
         self.score = 0
         self.food = None
         self._place_food()
+
+
 
     def _place_food(self):
         x = random.randint(0, (self.w-BLOCK_SIZE )//BLOCK_SIZE )*BLOCK_SIZE
