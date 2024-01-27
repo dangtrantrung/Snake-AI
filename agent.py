@@ -15,8 +15,9 @@ class Agent:
         self.epsilon=0 # randomness
         self.gamma=0  # discount rate
         self.memory=deque(maxlen=MAX_MEMORY)  #popleft remove elements from left memory
-        # TODO: model, trainer
-
+        #TODO: model, trainer
+        self.model = None #TODO
+        self.trainer = None #TODO
 
     def get_state(self,game):
         head = game.snake[0]
@@ -65,11 +66,23 @@ class Agent:
         return np.array(state, dtype=int)
 
     def remember(self,state,action,reward,next_state,done):
-        pass
+        self.memory.append((state,action,reward,next_state,done)) # only 1 tuple stored, popleft remove elements from left memory if MAX Memory is reached
+
     def train_long_memory(self):
-        pass
+        #pass
+        if(len(self.memory)>BATCH_SIZE):
+            mini_sample=random.sample(self.memory,BATCH_SIZE) #list of tuples
+        else:
+            mini_sample=self.memory
+        #for state, action, reward, nexrt_state, done in mini_sample:
+        #self.trainer.train_step(state, action, reward, next_state, done)
+        states,actions,rewards,next_states,dones=zip(*mini_sample)
+        self.trainer.train_step(states,actions,rewards,next_states,dones)
+
     def train_short_memory(self):
-        pass
+        #pass
+        self.trainer.train_step(state,action,reward,next_state,done)
+
     def get_action(self,state):
         pass
 
