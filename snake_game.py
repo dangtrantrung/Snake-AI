@@ -41,6 +41,8 @@ class SnakeGameAI:
         self.display = pygame.display.set_mode((self.w, self.h))
         pygame.display.set_caption('Snake')
         self.clock = pygame.time.Clock()
+        # reset
+        self.reset()
 
 
 
@@ -57,6 +59,7 @@ class SnakeGameAI:
         self.score = 0
         self.food = None
         self._place_food()
+
 
 
 
